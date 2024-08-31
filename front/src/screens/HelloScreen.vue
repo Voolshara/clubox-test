@@ -3,7 +3,7 @@
     class="h-screen w-full pt-14 flex flex-col items-center justify-center gap-y-14 bg-gradient-to-br from-violet-900 to-pink-900"
   >
     <span class="text-3xl font-bold"
-      >Введи свою дату рождения {{ userData }}</span
+      >Введи свою дату рождения {{ JSON.stringify(userData) + "" }}</span
     >
     <CalendarSlider />
 
@@ -20,7 +20,7 @@ import CalendarSlider from "../components/CalendarSlider/CalendarSlider.vue";
 export default defineComponent({
   components: { CalendarSlider },
   setup() {
-    const userData = (window as any).Telegram.WebApp.WebAppInitData;
+    const userData = (window as any).Telegram;
     return userData;
   },
 });

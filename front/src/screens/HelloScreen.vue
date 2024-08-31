@@ -3,7 +3,8 @@
     class="h-screen w-full pt-14 flex flex-col items-center justify-center gap-y-14 bg-gradient-to-br from-violet-900 to-pink-900"
   >
     <span class="text-3xl font-bold"
-      >Введи свою дату рождения {{ JSON.stringify(userData) + "" }}</span
+      >Введи свою дату рождения
+      {{ JSON.stringify(first_name, last_name, username) + "" }}</span
     >
     <CalendarSlider />
 
@@ -24,11 +25,11 @@ interface TelegrammedWindow extends Window {
 export default defineComponent({
   components: { CalendarSlider },
   setup() {
-    const userData = (window as unknown as TelegrammedWindow).Telegram.Webapp
-      ?.initData;
-    alert(userData);
+    const { first_name, last_name, username } = (
+      window as unknown as TelegrammedWindow
+    ).Telegram.WebApp.initDataUnsafe.user;
 
-    return userData;
+    return { first_name, last_name, username };
   },
 });
 </script>

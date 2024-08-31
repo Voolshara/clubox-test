@@ -20,7 +20,7 @@ import CalendarSlider from "../components/CalendarSlider/CalendarSlider.vue";
 export default defineComponent({
   components: { CalendarSlider },
   setup() {
-    const userData = (window as any).Telegram;
+    const userData = window as any;
     return userData;
   },
 });

@@ -9,9 +9,9 @@ from aiogram.filters import CommandStart
 from aiogram.types import Message
 from aiogram.types import Message, WebAppInfo
 
-from aiogram.types.keyboard_button import KeyboardButton
+from aiogram.types.inline_keyboard_button import InlineKeyboardButton
+from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram.types.reply_keyboard_markup import ReplyKeyboardMarkup
-# from aiogram.utils.keyboard import InlineKeyboardBuilder, InlineKeyboardButton, KeyboardBuilder
 
 
 from aiogram.utils.web_app import safe_parse_webapp_init_data
@@ -24,12 +24,10 @@ dp = Dispatcher()
 web_app = WebAppInfo(url="https://webapp.tungulov.space")
 
 
-def webAppKeyboard(): #создание клавиатуры с webapp кнопкой
-    kb = [
-        [KeyboardButton(text="Web App", web_app=web_app)],
-    ]
-    keyboard = ReplyKeyboardMarkup(keyboard=kb)
-    return keyboard
+def webAppKeyboard():
+    keyboard = InlineKeyboardBuilder()
+    keyboard.row(InlineKeyboardButton(text="Web App", web_app=web_app))
+    return keyboard.as_markup()
 
 @dp.message(CommandStart())
 async def command_start_handler(message: Message) -> None:

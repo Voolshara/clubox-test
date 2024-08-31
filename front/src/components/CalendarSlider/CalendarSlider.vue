@@ -5,7 +5,7 @@
     </div>
     <div
       ref="daySlider"
-      class="custom-slider relative z-10 w-28 h-full overflow-y-scroll scroll-smooth flex flex-col gap-y-7 py-36"
+      class="custom-slider relative z-10 w-28 h-full overflow-y-scroll scroll-smooth flex flex-col py-36"
       @scroll="onScroll('day')"
     >
       <CalendarSelectedItem
@@ -17,7 +17,7 @@
     </div>
     <div
       ref="monthSlider"
-      class="custom-slider relative z-10 w-full h-full overflow-y-scroll scroll-smooth flex flex-col gap-y-7 py-36"
+      class="custom-slider relative z-10 w-full h-full overflow-y-scroll scroll-smooth flex flex-col py-36"
       @scroll="onScroll('month')"
     >
       <CalendarSelectedItem
@@ -29,7 +29,7 @@
     </div>
     <div
       ref="yearSlider"
-      class="custom-slider relative z-10 w-32 h-full overflow-y-scroll scroll-smooth flex flex-col gap-y-7 py-36"
+      class="custom-slider relative z-10 w-32 h-full overflow-y-scroll scroll-smooth flex flex-col py-36"
       @scroll="onScroll('year')"
     >
       <CalendarSelectedItem
@@ -46,16 +46,14 @@
 import { reactive, ref } from "vue";
 import { days, years, months } from "./dateData";
 import CalendarSelectedItem from "./CalendarSelectedItem.vue";
-
-interface selectedDateType {
-  selectedDay: string;
-  selectedMonth: string;
-  selectedYear: string;
-}
+import { selectedDateType } from "../../types/datePicker.types.ts";
+import { useSelectedDateStore } from "../../store/";
 
 export default {
   components: { CalendarSelectedItem },
   setup() {
+    const store = useSelectedDateStore();
+
     let scrollTimeout: ReturnType<typeof setTimeout> | null = null;
     const now_date = new Date(Date.now());
     const selectedDate: selectedDateType = reactive({
@@ -156,6 +154,8 @@ export default {
           });
         }
       }
+
+      store.setSelectedDate(selectedDate);
     };
 
     return {

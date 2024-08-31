@@ -9,6 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "pinia": "^2.2.2",
+    "url": "^0.11.4",
     "vue": "^3.4.38"
   },
   "devDependencies": {

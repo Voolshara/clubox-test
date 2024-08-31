@@ -1,5 +1,7 @@
 <template>
-  <span class="" :class="{ 'font-bold': isSelected }">{{ props.label }}</span>
+  <span class="py-4" :class="{ 'font-bold': isSelected }">{{
+    props.label
+  }}</span>
 </template>
 
 <script lang="ts" setup>

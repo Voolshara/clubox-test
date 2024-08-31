@@ -17,10 +17,17 @@
 import { defineComponent } from "vue";
 import CalendarSlider from "../components/CalendarSlider/CalendarSlider.vue";
 
+interface TelegrammedWindow extends Window {
+  Telegram: any;
+}
+
 export default defineComponent({
   components: { CalendarSlider },
   setup() {
-    const userData = window as any;
+    const userData = (window as unknown as TelegrammedWindow).Telegram.Webapp
+      ?.initData;
+    alert(userData);
+
     return userData;
   },
 });

@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import CalendarSlider from "@/components/CalendarSlider/CalendarSlider.vue";
+import CalendarSlider from "../components/CalendarSlider/CalendarSlider.vue";
 
 export default defineComponent({
   components: { CalendarSlider },

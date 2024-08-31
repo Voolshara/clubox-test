@@ -6,17 +6,13 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
 import NavBar from "./components/NavBar.vue";
 import HelloScreen from "./screens/HelloScreen.vue";
 
-@Options({
-  components: {
-    NavBar,
-    HelloScreen,
-  },
-})
-export default class App extends Vue {}
+export default {
+  components: { NavBar, HelloScreen },
+  setup() {},
+};
 </script>
 
 <style>

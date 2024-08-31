@@ -1,16 +1,19 @@
 <template>
-  <div class="text-white">
+  <div class="text-white flex flex-col">
     <NavBar />
+    <HelloScreen />
   </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import NavBar from "./components/NavBar.vue";
+import HelloScreen from "./screens/HelloScreen.vue";
 
 @Options({
   components: {
     NavBar,
+    HelloScreen,
   },
 })
 export default class App extends Vue {}

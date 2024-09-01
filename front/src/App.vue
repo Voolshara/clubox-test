@@ -27,6 +27,7 @@ export default {
     const initData = (window as unknown as TelegrammedWindow).Telegram.WebApp
       .initData;
 
+    alert(initData);
     const splittedInitData = (initData as string).split("tg_user-")[1];
     alert(splittedInitData);
     if (splittedInitData !== undefined) {

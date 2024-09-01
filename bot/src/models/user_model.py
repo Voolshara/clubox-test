@@ -2,7 +2,6 @@ from datetime import date
 from pydantic import BaseModel
 
 class User_model(BaseModel):
-    id :int
     tg_id: int
     tg_name: str
     tg_lastname: str

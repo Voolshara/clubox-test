@@ -2,9 +2,13 @@ from contextlib import asynccontextmanager
 from datetime import datetime
 
 from fastapi import Depends, FastAPI, HTTPException, Request
+from fastapi.middleware.cors import CORSMiddleware
+
 from src.db.db import init_db, register_tortoise, CONNECTION_STRING
 from src.models.user_model import User_model, User_birth_response
 from src import crud
+
+from fastapi.middleware.cors import CORSMiddleware
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -20,6 +24,15 @@ async def lifespan(app: FastAPI):
     # do sth after db closed
 
 app = FastAPI(title="WebbApp server", lifespan=lifespan)
+origins = [
+    "*"
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/", summary="Check responsibility")
 def root():

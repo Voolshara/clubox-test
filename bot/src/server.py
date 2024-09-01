@@ -1,0 +1,40 @@
+from contextlib import asynccontextmanager
+from datetime import datetime
+
+from fastapi import Depends, FastAPI, HTTPException, Request
+from src.db.db import init_db, register_tortoise, CONNECTION_STRING
+from src.models.user_model import User_model, User_birth_response
+from src import crud
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # do sth before db inited
+    async with register_tortoise(
+        app,
+        db_url=CONNECTION_STRING,
+        modules={"models": ["src.db.schemas"]},
+        add_exception_handlers=True,
+    ):
+        # do sth while db connected
+        yield
+    # do sth after db closed
+
+app = FastAPI(title="WebbApp server", lifespan=lifespan)
+
+@app.get("/", summary="Check responsibility")
+def root():
+    return {"message": "It's working"}
+
+@app.get("/user/{tg_id}", response_model=User_birth_response, summary="Get user data")
+async def user(tg_id: int):
+    me = await crud.get_user_data(tg_id)
+    days_for_birth = datetime.now().date() - me.date_birth
+    if me:
+        return User_birth_response(**me.__dict__, days_for_birth=days_for_birth.days)
+    raise HTTPException(status_code=404, detail="Bad request")
+
+@app.post("/user/", response_model=User_birth_response, summary="Add user")
+async def create_user(user: User_model):
+    db_user = await crud.add_user(user=user)
+    days_for_birth = datetime.now().date() - db_user.date_birth
+    return User_birth_response(**db_user.__dict__, days_for_birth=days_for_birth.days)

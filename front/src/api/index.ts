@@ -17,7 +17,7 @@ export const getUserData = async (tg_id: String) => {
 
 export const setUserData = async (userData: addUserType) => {
   const store = useUserDataStore();
-
+  alert(JSON.stringify(userData));
   const response = await fetch(`${apiLink}/user/`, {
     method: "POST",
     body: JSON.stringify(userData),

@@ -24,11 +24,11 @@ export default {
     const { id } = (window as unknown as TelegrammedWindow).Telegram.WebApp
       .initDataUnsafe.user;
 
-    const initData = (window as unknown as TelegrammedWindow).Telegram.WebApp
-      .initData;
+    const start_param = (window as unknown as TelegrammedWindow).Telegram.WebApp
+      .initDataUnsafe.start_param;
 
-    alert(initData);
-    const splittedInitData = (initData as string).split("tg_user-")[1];
+    alert(start_param);
+    const splittedInitData = (start_param as string).split("tg_user-")[1];
     alert(splittedInitData);
     if (splittedInitData !== undefined) {
       const tg_id = splittedInitData.split("&")[0];

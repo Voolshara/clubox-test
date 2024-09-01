@@ -46,6 +46,7 @@ export default defineComponent({
         tg_name: first_name,
         tg_username: username,
       });
+      is_clicked = true;
     };
 
     return { sendUserData, is_clicked };

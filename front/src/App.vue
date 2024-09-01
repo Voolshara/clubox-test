@@ -25,7 +25,8 @@ export default {
       .WebApp.initData;
 
     if (start_param) {
-      const tg_id = (start_param as string).split("tg_user=")[1];
+      const tg_id = (start_param as string).split("tg_user-")[1];
+      alert(tg_id);
       getUserData(tg_id);
     } else {
       const { id } = (window as unknown as TelegrammedWindow).Telegram.WebApp

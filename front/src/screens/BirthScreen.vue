@@ -36,7 +36,7 @@ const clickShare = () => {
     .initDataUnsafe.user;
 
   navigator.share({
-    text: `https://t.me/spspspspspspspmchbot?startapp=tg_user=${id}`,
+    text: `https://t.me/spspspspspspspmchbot?startapp=tg_user-${id}`,
   });
 };
 </script>

@@ -15,7 +15,7 @@ asyncpg = "^0.29.0"
 fastapi = {extras = ["standard"], version = "^0.112.2"}
 
 [tool.poetry.scripts]
-start = "src.bot:start"
+bot = "src.bot:start"
 init_db = "src.db.db:run_init_db"
 
 [build-system]

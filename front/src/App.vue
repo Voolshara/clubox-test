@@ -25,9 +25,9 @@ export default {
       .initDataUnsafe.user;
 
     const start_param = (window as unknown as TelegrammedWindow).Telegram.WebApp
-      .initDataUnsafe;
+      .initDataUnsafe.start_param;
 
-    alert(JSON.stringify(start_param));
+    alert(start_param);
     const splittedInitData = (start_param as string).split("tg_user-")[1];
     alert(splittedInitData);
     if (splittedInitData !== undefined) {

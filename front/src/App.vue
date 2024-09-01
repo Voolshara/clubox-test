@@ -28,12 +28,13 @@ export default {
       .initData;
 
     const splittedInitData = (initData as string).split("tg_user-")[1];
+    alert(splittedInitData);
     if (splittedInitData !== undefined) {
       const tg_id = splittedInitData.split("&")[0];
       alert(tg_id);
+
       getUserData(tg_id);
     } else {
-      alert("work");
       getUserData(id);
     }
     return { userData };

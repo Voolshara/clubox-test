@@ -21,15 +21,18 @@ export default {
     const store = useUserDataStore();
     const userData = computed(() => store.getUserData);
 
+    const { id } = (window as unknown as TelegrammedWindow).Telegram.WebApp
+      .initDataUnsafe.user;
+
     const initData = (window as unknown as TelegrammedWindow).Telegram.WebApp
       .initData;
+
+    alert(id);
 
     if (initData !== "") {
       const tg_id = (initData as string).split("tg_user-")[1].split("&")[0];
       getUserData(tg_id);
     } else {
-      const { id } = (window as unknown as TelegrammedWindow).Telegram.WebApp
-        .initDataUnsafe.user;
       getUserData(id);
     }
     return { userData };

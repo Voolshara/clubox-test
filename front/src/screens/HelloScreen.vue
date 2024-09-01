@@ -1,12 +1,5 @@
 <template>
   <div
-    v-if="is_clicked"
-    class="h-screen w-full pt-14 flex flex-col items-center justify-center gap-y-14 bg-gradient-to-br from-violet-900 to-pink-900"
-  >
-    Loading ...
-  </div>
-  <div
-    v-else
     class="h-screen w-full pt-14 flex flex-col items-center justify-center gap-y-14 bg-gradient-to-br from-violet-900 to-pink-900"
   >
     <span class="text-3xl font-bold">Введи свою дату рождения</span>
@@ -31,7 +24,6 @@ import { TelegrammedWindow } from "../types/telegrammedWindow.types.ts";
 export default defineComponent({
   components: { CalendarSlider },
   setup() {
-    let is_clicked = false;
     const store = useSelectedDateStore();
     const selectedDate = computed(() => store.getSelectedDate);
     const { id, first_name, last_name, username } = (
@@ -46,10 +38,9 @@ export default defineComponent({
         tg_name: first_name,
         tg_username: username,
       });
-      is_clicked = true;
     };
 
-    return { sendUserData, is_clicked };
+    return { sendUserData };
   },
 });
 </script>

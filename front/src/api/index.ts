@@ -1,8 +1,8 @@
 import { useUserDataStore } from "../store";
 import { addUserType, userDataType } from "../types/user.types";
 
-const apiLink = "http://127.0.0.1:8000";
-// const apiLink = "https://webappapi.tungulov.space";
+// const apiLink = "http://127.0.0.1:8000";
+const apiLink = "https://webappapi.tungulov.space";
 
 export const getUserData = async (tg_id: String) => {
   const store = useUserDataStore();

@@ -42,8 +42,8 @@ def root():
 @app.get("/user/{tg_id}", response_model=User_birth_response, summary="Get user data")
 async def user(tg_id: int):
     db_user = await crud.get_user_data(tg_id)
-    days, hours, minutes = time_until_birthday(db_user.date_birth)
     if db_user:
+        days, hours, minutes = time_until_birthday(db_user.date_birth)
         return User_birth_response(
             **db_user.__dict__,
             birth_data=BirthData(

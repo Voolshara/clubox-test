@@ -13,13 +13,17 @@ import HelloScreen from "./screens/HelloScreen.vue";
 import BirthScreen from "./screens/BirthScreen.vue";
 import { useUserDataStore } from "./store/";
 import { getUserData } from "./api/";
+import { TelegrammedWindow } from "./types/telegrammedWindow.types.ts";
 
 export default {
   components: { NavBar, HelloScreen, BirthScreen },
   setup() {
+    const { id } = (window as unknown as TelegrammedWindow).Telegram.WebApp
+      .initDataUnsafe.user;
+
     const store = useUserDataStore();
     const userData = computed(() => store.getUserData);
-    getUserData("111");
+    getUserData(id);
     return { userData };
   },
 };

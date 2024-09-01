@@ -5,7 +5,10 @@
     <span class="text-3xl font-bold">Введи свою дату рождения</span>
     <CalendarSlider />
 
-    <button class="w-5/6 bg-white text-black py-3 rounded-2xl">
+    <button
+      class="w-5/6 bg-white text-black py-3 rounded-2xl"
+      v-on:click="sendUserData"
+    >
       Продолжить
     </button>
   </div>
@@ -15,22 +18,29 @@
 import { computed, defineComponent } from "vue";
 import CalendarSlider from "../components/CalendarSlider/CalendarSlider.vue";
 import { useSelectedDateStore } from "../store";
-
-// interface TelegrammedWindow extends Window {
-//   Telegram: any;
-// }
+import { setUserData } from "../api";
+import { TelegrammedWindow } from "../types/telegrammedWindow.types.ts";
 
 export default defineComponent({
   components: { CalendarSlider },
   setup() {
     const store = useSelectedDateStore();
     const selectedDate = computed(() => store.getSelectedDate);
-    // const { id, first_name, last_name, username } = (
-    //   window as unknown as TelegrammedWindow
-    // ).Telegram.WebApp.initDataUnsafe.user;
+    const { id, first_name, last_name, username } = (
+      window as unknown as TelegrammedWindow
+    ).Telegram.WebApp.initDataUnsafe.user;
 
-    // return { id, first_name, last_name, username };
-    return { selectedDate };
+    const sendUserData = () => {
+      setUserData({
+        date_birth: selectedDate.value,
+        tg_id: id,
+        tg_lastname: last_name,
+        tg_name: first_name,
+        tg_username: username,
+      });
+    };
+
+    return { sendUserData };
   },
 });
 </script>

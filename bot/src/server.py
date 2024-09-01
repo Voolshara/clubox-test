@@ -4,8 +4,9 @@ from datetime import datetime
 from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 
+from src.common import time_until_birthday
 from src.db.db import init_db, register_tortoise, CONNECTION_STRING
-from src.models.user_model import User_model, User_birth_response
+from src.models.user_model import BirthData, User_model, User_birth_response
 from src import crud
 
 from fastapi.middleware.cors import CORSMiddleware
@@ -40,14 +41,28 @@ def root():
 
 @app.get("/user/{tg_id}", response_model=User_birth_response, summary="Get user data")
 async def user(tg_id: int):
-    me = await crud.get_user_data(tg_id)
-    days_for_birth = datetime.now().date() - me.date_birth
-    if me:
-        return User_birth_response(**me.__dict__, days_for_birth=days_for_birth.days)
+    db_user = await crud.get_user_data(tg_id)
+    days, hours, minutes = time_until_birthday(db_user.date_birth)
+    if db_user:
+        return User_birth_response(
+            **db_user.__dict__,
+            birth_data=BirthData(
+                days_for_birth = days,
+                minutes_for_birth = minutes,
+                hours_for_birth = hours
+                ),
+            )
     raise HTTPException(status_code=404, detail="Bad request")
 
 @app.post("/user/", response_model=User_birth_response, summary="Add user")
 async def create_user(user: User_model):
     db_user = await crud.add_user(user=user)
-    days_for_birth = datetime.now().date() - db_user.date_birth
-    return User_birth_response(**db_user.__dict__, days_for_birth=days_for_birth.days)
+    days, hours, minutes = time_until_birthday(db_user.date_birth)
+    return User_birth_response(
+        **db_user.__dict__,
+        birth_data=BirthData(
+            days_for_birth = days,
+            minutes_for_birth = minutes,
+            hours_for_birth = hours
+        ),
+        )

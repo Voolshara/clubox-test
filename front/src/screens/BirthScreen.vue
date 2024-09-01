@@ -8,9 +8,9 @@
       <p>Юзернейм пользователя: {{ props.userData?.tg_username }}</p>
       <div class="flex flex-col gap-y-3">
         <p>До дня рождения:</p>
-        <p>Дней: {{ props.userData.days_for_birth }}</p>
-        <p>Часов: {{ props.userData.days_for_birth }}</p>
-        <p>Минут: {{ props.userData.days_for_birth }}</p>
+        <p>Дней: {{ props.userData.birth_data.days_for_birth }}</p>
+        <p>Часов: {{ props.userData.birth_data.hours_for_birth }}</p>
+        <p>Минут: {{ props.userData.birth_data.minutes_for_birth }}</p>
       </div>
     </div>
     <button

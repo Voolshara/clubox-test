@@ -22,7 +22,7 @@ export default {
     const userData = computed(() => store.getUserData);
 
     const { initData } = (window as unknown as TelegrammedWindow).Telegram
-      .WebApp.initData;
+      .WebApp;
 
     alert(initData);
 

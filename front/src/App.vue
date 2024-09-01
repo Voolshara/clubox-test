@@ -27,12 +27,14 @@ export default {
     const initData = (window as unknown as TelegrammedWindow).Telegram.WebApp
       .initData;
 
-    alert(id);
+    const splittedInitData = (initData as string).split("tg_user-")[1];
 
-    if (initData !== "") {
-      const tg_id = (initData as string).split("tg_user-")[1].split("&")[0];
+    if (splittedInitData !== "") {
+      alert(id);
+      const tg_id = splittedInitData.split("&")[0];
       getUserData(tg_id);
     } else {
+      alert("work");
       getUserData(id);
     }
     return { userData };

@@ -28,9 +28,9 @@ export default {
       const tg_id = (initData as string).split("tg_user-")[1].split("&")[0];
       getUserData(tg_id);
     } else {
-      const { id } = (window as unknown as TelegrammedWindow).Telegram.WebApp
-        .initDataUnsafe.user;
-      getUserData(id);
+      // const { id } = (window as unknown as TelegrammedWindow).Telegram.WebApp
+      //   .initDataUnsafe.user;
+      getUserData("111");
     }
     return { userData };
   },

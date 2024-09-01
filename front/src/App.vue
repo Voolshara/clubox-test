@@ -28,12 +28,9 @@ export default {
       .initDataUnsafe.start_param;
 
     alert(start_param);
-    const splittedInitData = (start_param as string).split("tg_user-")[1];
-    alert(splittedInitData);
-    if (start_param !== undefined && splittedInitData !== undefined) {
+    if (start_param !== undefined) {
+      const splittedInitData = (start_param as string).split("tg_user-")[1];
       const tg_id = splittedInitData.split("&")[0];
-      alert(tg_id);
-
       getUserData(tg_id);
     } else {
       getUserData(id);

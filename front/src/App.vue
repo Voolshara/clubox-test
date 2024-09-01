@@ -29,8 +29,7 @@ export default {
 
     const splittedInitData = (initData as string).split("tg_user-")[1];
 
-    if (splittedInitData && splittedInitData !== "") {
-      alert(splittedInitData);
+    if (splittedInitData) {
       const tg_id = splittedInitData.split("&")[0];
       getUserData(tg_id);
     } else {

@@ -56,7 +56,7 @@ async def user(tg_id: int):
     raise HTTPException(status_code=404, detail="Bad request")
 
 @app.post("/user/", response_model=User_birth_response, summary="Add user")
-async def create_user(user: str):
+async def create_user(user: any):
     print(user)
     db_user = await crud.add_user(user=user)
     days, hours, minutes = time_until_birthday(db_user.date_birth)

@@ -1,8 +1,8 @@
 import { useUserDataStore } from "../store";
 import { addUserType, userDataType } from "../types/user.types";
 
-// const apiLink = "http://127.0.0.1:8000";
-const apiLink = "https://webappapi.tungulov.space";
+const apiLink = "http://127.0.0.1:8000";
+// const apiLink = "https://webappapi.tungulov.space";
 
 export const getUserData = async (tg_id: String) => {
   const store = useUserDataStore();
@@ -17,9 +17,13 @@ export const getUserData = async (tg_id: String) => {
 
 export const setUserData = async (userData: addUserType) => {
   const store = useUserDataStore();
-  alert(JSON.stringify(userData));
+  console.log(JSON.stringify(userData));
   const response = await fetch(`${apiLink}/user/`, {
     method: "POST",
+    headers: {
+      "content-type": "application/json",
+      Accept: "application/json",
+    },
     body: JSON.stringify(userData),
   });
 

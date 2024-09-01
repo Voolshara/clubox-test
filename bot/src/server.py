@@ -1,6 +1,5 @@
 from contextlib import asynccontextmanager
 from datetime import datetime
-from typing import Dict, Any
 
 from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -26,14 +25,13 @@ async def lifespan(app: FastAPI):
     # do sth after db closed
 
 app = FastAPI(title="WebbApp server", lifespan=lifespan)
-origins = [
-    "*"
-]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=['*'],
+    allow_credentials=True,
+    allow_methods=['*'],
+    allow_headers=['*'],
 )
 
 @app.get("/", summary="Check responsibility")
@@ -56,8 +54,7 @@ async def user(tg_id: int):
     raise HTTPException(status_code=404, detail="Bad request")
 
 @app.post("/user/", response_model=User_birth_response, summary="Add user")
-async def create_user(user: any):
-    print(user)
+async def create_user(user: User_model):
     db_user = await crud.add_user(user=user)
     days, hours, minutes = time_until_birthday(db_user.date_birth)
     return User_birth_response(

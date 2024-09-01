@@ -18,13 +18,20 @@ import { TelegrammedWindow } from "./types/telegrammedWindow.types.ts";
 export default {
   components: { NavBar, HelloScreen, BirthScreen },
   setup() {
-    const { id } = (window as unknown as TelegrammedWindow).Telegram.WebApp
-      .initDataUnsafe.user;
-
-    alert((window as unknown as TelegrammedWindow).Telegram.WebApp.initData);
     const store = useUserDataStore();
     const userData = computed(() => store.getUserData);
-    getUserData(id);
+
+    const { start_param } = (window as unknown as TelegrammedWindow).Telegram
+      .WebApp.initData;
+
+    if (start_param) {
+      const tg_id = (start_param as string).split("tg_user=")[1];
+      getUserData(tg_id);
+    } else {
+      const { id } = (window as unknown as TelegrammedWindow).Telegram.WebApp
+        .initDataUnsafe.user;
+      getUserData(id);
+    }
     return { userData };
   },
 };

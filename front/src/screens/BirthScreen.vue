@@ -25,14 +25,18 @@
 <script lang="ts" setup>
 import { defineProps } from "vue";
 import { UserDataType } from "../types/user.types.ts";
+import { TelegrammedWindow } from "../types/telegrammedWindow.types.ts";
 
 const props = defineProps({
   userData: { type: Object as () => UserDataType, required: true },
 });
 
 const clickShare = () => {
+  const { id } = (window as unknown as TelegrammedWindow).Telegram.WebApp
+    .initDataUnsafe.user;
+
   navigator.share({
-    text: "quququuq",
+    text: `https://t.me/spspspspspspspmchbot?startapp=tg_user=${id}`,
   });
 };
 </script>

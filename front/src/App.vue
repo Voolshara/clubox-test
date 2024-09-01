@@ -25,9 +25,7 @@ export default {
       .initData;
 
     if (initData) {
-      alert((initData as string).split("tg_user-")[1]);
       const tg_id = (initData as string).split("tg_user-")[1].split("&")[0];
-      alert(tg_id);
       getUserData(tg_id);
     } else {
       const { id } = (window as unknown as TelegrammedWindow).Telegram.WebApp

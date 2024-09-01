@@ -21,8 +21,8 @@ export default {
     const store = useUserDataStore();
     const userData = computed(() => store.getUserData);
 
-    const { initData } = (window as unknown as TelegrammedWindow).Telegram
-      .WebApp;
+    const initData = (window as unknown as TelegrammedWindow).Telegram.WebApp
+      .initData;
 
     alert(initData);
 

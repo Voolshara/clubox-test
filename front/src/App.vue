@@ -21,6 +21,7 @@ export default {
     const { id } = (window as unknown as TelegrammedWindow).Telegram.WebApp
       .initDataUnsafe.user;
 
+    alert((window as unknown as TelegrammedWindow).Telegram.WebApp.initData);
     const store = useUserDataStore();
     const userData = computed(() => store.getUserData);
     getUserData(id);

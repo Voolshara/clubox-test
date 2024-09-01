@@ -30,7 +30,7 @@ export default {
     alert(start_param);
     const splittedInitData = (start_param as string).split("tg_user-")[1];
     alert(splittedInitData);
-    if (splittedInitData !== undefined) {
+    if (start_param !== undefined && splittedInitData !== undefined) {
       const tg_id = splittedInitData.split("&")[0];
       alert(tg_id);
 
